@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velo - AI-Powered Weightlifting Form Tracking</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 40px;
+  z-index: 1000;
+  background: rgba(10,10,10,.75);
+  backdrop-filter: blur(10px);
+}
+
+.logo-image {
+  height: 45px;
+}
+
+/* HERO */
+/* FEATURES */
+.features {
+  padding: 120px 20px;
+  background: #0a0a0a;
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+}
+
+.features-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 40px;
+}
+
+.feature-card {
+  background: #111;
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,217,255,.15);
+}
+
+.feature-card h3 {
+  margin-bottom: 12px;
+}
+
+/* WAITLIST */
+.waitlist {
+  padding: 120px 20px;
+  background: #0f0f0f;
+  text-align: center;
+}
+
+.waitlist h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.waitlist p {
+  opacity: .7;
+  margin-bottom: 40px;
+}
+
+.waitlist-form {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.waitlist-form input {
+  flex: 1;
+  padding: 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+.waitlist-form button {
+  padding: 16px 30px;
+  border-radius: 8px;
+  border: none;
+  background: #00d9ff;
+  font-weight: 600;
+}
+
+/* FOOTER */
+.footer {
+  background: #111;
+  padding: 60px 20px;
+  text-align: center;
+  opacity: .6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.3rem; }
+  .hero p { font-size: 1.1rem; }
+  .features-grid { grid-template-columns: 1fr; }
+  .waitlist-form { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <img src="velo-logo.svg" class="logo-image" alt="Velo">
+</header>
+
+<section class="hero" id="home">
+
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="./hero-video.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-fallback"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Launching 2026</div>
+    <h1>
+      Perfect Your Form.
+      <span style="color:#00d9ff;text-shadow:0 0 20px rgba(0,217,255,.5);">
+        Every Rep.
+      </span>
+    </h1>
+    <p>AI-powered form analysis that helps you lift safer and build muscle faster.</p>
+    <div class="hero-buttons">
+      <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
+      <a href="#features" class="btn btn-secondary">See How It Works</a>
+    </div>
+  </div>
+
+</section>
+
+<section class="features" id="features">
+  <h2>How It Works</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3>Real-Time Form Analysis</h3>
+      <p>AI analyzes every rep instantly through your camera.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Personalized Feedback</h3>
+      <p>Custom corrections tailored to your body mechanics.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Track Progress</h3>
+      <p>Visualize improvement over time with analytics.</p>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist" id="waitlist">
+  <h2>Be First to Train Smarter</h2>
+  <p>Join the waitlist for early access.</p>
+  <form class="waitlist-form">
+    <input type="email" placeholder="Enter your email" required>
+    <button type="submit">Join</button>
+  </form>
+</section>
+
+<footer class="footer">
+  © 2026 Velo. All rights reserved.
+</footer>
+
+</body>
+</html>
