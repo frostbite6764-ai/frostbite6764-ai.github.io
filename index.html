@@ -29,11 +29,14 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 40px;
+            height: 100px;
+            padding: 0 40px;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
+            display: flex;
+            align-items: center;
         }
         
         .logo-link {
@@ -47,7 +50,7 @@
         }
         
         .logo-image {
-            height: 100px;
+            height: 200px;
             width: auto;
             display: block;
         }
@@ -544,11 +547,12 @@
         /* Mobile */
         @media (max-width: 480px) {
             .header {
-                padding: 15px 20px;
+                padding: 0 20px;
+                height: 80px;
             }
             
             .logo-image {
-                height: 80px;
+                height: 150px;
             }
             
             .hero h1 {
