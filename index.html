@@ -29,7 +29,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 120px;
+            height: 50px;
             padding: 0 40px;
             z-index: 1000;
             background: rgba(10, 10, 10, 0.4);
@@ -592,11 +592,6 @@
             .waitlist-submit {
                 width: 100%;
             }
-            
-            /* Hide video on mobile, show fallback */
-            .hero-video {
-                display: none;
-            }
         }
         
         /* Success message styling */
@@ -643,7 +638,7 @@
         <div class="hero-fallback"></div>
         
         <!-- Video Background (replace 'hero-video.mp4' with your actual video file) -->
-        <video class="hero-video" autoplay muted loop playsinline preload="auto">
+        <video class="hero-video" autoplay muted loop playsinline webkit-playsinline preload="metadata">
             <source src="hero-video.mp4" type="video/mp4">
         </video>
         
