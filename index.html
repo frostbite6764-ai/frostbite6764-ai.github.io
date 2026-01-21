@@ -716,15 +716,19 @@
             <h2>Be First to Train Smarter</h2>
             <p>Join the waitlist and get early access when Velo launches.</p>
             
-            <!-- Waitlist Form -->
-            <form class="waitlist-form" id="waitlistForm">
+           <!-- Waitlist Form -->
+            <form name="waitlist" method="POST" data-netlify="true" class="waitlist-form">
+                <input 
+                    type="hidden" 
+                    name="form-name" 
+                    value="waitlist"
+                >
                 <input 
                     type="email"
                     name="email" 
                     class="waitlist-input" 
                     placeholder="Enter your email" 
                     required
-                    id="emailInput"
                 >
                 <button type="submit" class="waitlist-submit">Get Early Access</button>
             </form>
@@ -790,6 +794,7 @@
         });
         
         // Google Sheets form submission
+        /*
         const form = document.getElementById('waitlistForm');
         const successMessage = document.getElementById('successMessage');
         
@@ -838,6 +843,7 @@
                 submitButton.textContent = 'Get Early Access';
             });
         });
+        */
     </script>
     
 </body>
