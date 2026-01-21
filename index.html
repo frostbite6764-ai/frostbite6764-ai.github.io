@@ -717,7 +717,7 @@
             <p>Join the waitlist and get early access when Velo launches.</p>
             
            <!-- Waitlist Form -->
-            <form name="waitlist" method="POST" data-netlify="true" class="waitlist-form">
+            <form name="waitlist" method="POST" data-netlify="true" action="/success" class="waitlist-form">
                 <input 
                     type="hidden" 
                     name="form-name" 
@@ -845,6 +845,11 @@
         });
         */
     </script>
+    
+    <!-- Netlify form detection helper -->
+    <form name="waitlist" netlify netlify-honeypot="bot-field" hidden>
+        <input type="email" name="email" />
+    </form>
     
 </body>
 </html>
