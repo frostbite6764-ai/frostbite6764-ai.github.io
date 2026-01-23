@@ -403,6 +403,7 @@
         
         .waitlist-form {
             display: flex;
+            flex-direction: column;
             gap: 15px;
             max-width: 500px;
             margin: 0 auto;
@@ -430,6 +431,11 @@
             box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
         }
         
+        .waitlist-input.error {
+            border-color: #ff4444;
+            box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
+        }
+        
         .waitlist-submit {
             padding: 18px 40px;
             font-size: 16px;
@@ -446,6 +452,24 @@
         .waitlist-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 217, 255, 0.4);
+        }
+        
+        .form-helper {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        .form-helper.error {
+            color: #ff4444;
+            animation: shake 0.3s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
         
         .trust-signal {
@@ -588,6 +612,11 @@
             
             .waitlist-form {
                 flex-direction: column;
+                gap: 15px;
+            }
+            
+            .waitlist-input {
+                width: 100%;
             }
             
             .waitlist-submit {
@@ -595,7 +624,7 @@
             }
             
             .hero-video {
-        object-position: 25% center;
+                object-position: 25% center;
             }
         }
         
@@ -716,21 +745,38 @@
             <h2>Be First to Train Smarter</h2>
             <p>Join the waitlist and get early access when Velo launches.</p>
             
-           <!-- Waitlist Form -->
-            <form name="waitlist" method="POST" data-netlify="true" action="/success" class="waitlist-form">
-                <input 
-                    type="hidden" 
-                    name="form-name" 
-                    value="waitlist"
-                >
+            <!-- Waitlist Form -->
+            <form name="waitlist" method="POST" data-netlify="true" action="/success" class="waitlist-form" id="waitlistForm">
+                <input type="hidden" name="form-name" value="waitlist">
+                
                 <input 
                     type="email"
                     name="email" 
                     class="waitlist-input" 
                     placeholder="Enter your email" 
                     required
+                    id="emailInput"
                 >
+                
+                <input 
+                    type="text"
+                    name="instagram" 
+                    class="waitlist-input" 
+                    placeholder="Instagram handle (e.g., @yourhandle)"
+                    id="instagramInput"
+                >
+                
+                <input 
+                    type="text"
+                    name="tiktok" 
+                    class="waitlist-input" 
+                    placeholder="TikTok handle (e.g., @yourhandle)"
+                    id="tiktokInput"
+                >
+                
                 <button type="submit" class="waitlist-submit">Get Early Access</button>
+                
+                <p class="form-helper" id="formHelper">*At least one social handle required</p>
             </form>
             
             <!-- Trust Signal -->
@@ -793,62 +839,66 @@
             }
         });
         
-        // Google Sheets form submission
-        /*
-        const form = document.getElementById('waitlistForm');
-        const successMessage = document.getElementById('successMessage');
-        
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('emailInput').value;
-            const submitButton = form.querySelector('button[type="submit"]');
-            
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-            
-            // TODO: Replace 'YOUR_SCRIPT_URL' with your actual Google Apps Script web app URL
-            const scriptURL = 'YOUR_SCRIPT_URL';
-            
-            // Send data to Google Sheets
-            fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email: email })
-            })
-            .then(response => {
-                // Show success message
-                successMessage.classList.add('show');
+        // Form validation - at least one social handle required
+        const waitlistForm = document.getElementById('waitlistForm');
+        const instagramInput = document.getElementById('instagramInput');
+        const tiktokInput = document.getElementById('tiktokInput');
+        const formHelper = document.getElementById('formHelper');
+
+        if (waitlistForm) {
+            waitlistForm.addEventListener('submit', function(e) {
+                const instagramValue = instagramInput.value.trim();
+                const tiktokValue = tiktokInput.value.trim();
                 
-                // Clear form
-                document.getElementById('emailInput').value = '';
+                // Check if at least one social handle is filled
+                if (!instagramValue && !tiktokValue) {
+                    e.preventDefault();
+                    
+                    // Show error state
+                    instagramInput.classList.add('error');
+                    tiktokInput.classList.add('error');
+                    formHelper.classList.add('error');
+                    formHelper.textContent = '*Please enter at least one social handle';
+                    
+                    // Scroll to form
+                    waitlistForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    return false;
+                }
                 
-                // Reset button
-                submitButton.disabled = false;
-                submitButton.textContent = 'Get Early Access';
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 5000);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Something went wrong. Please try again.');
-                submitButton.disabled = false;
-                submitButton.textContent = 'Get Early Access';
+                // Clear error states if validation passes
+                instagramInput.classList.remove('error');
+                tiktokInput.classList.remove('error');
+                formHelper.classList.remove('error');
+                formHelper.textContent = '*At least one social handle required';
             });
-        });
-        */
+            
+            // Remove error state when user starts typing
+            instagramInput.addEventListener('input', function() {
+                if (this.value.trim() || tiktokInput.value.trim()) {
+                    instagramInput.classList.remove('error');
+                    tiktokInput.classList.remove('error');
+                    formHelper.classList.remove('error');
+                    formHelper.textContent = '*At least one social handle required';
+                }
+            });
+            
+            tiktokInput.addEventListener('input', function() {
+                if (this.value.trim() || instagramInput.value.trim()) {
+                    instagramInput.classList.remove('error');
+                    tiktokInput.classList.remove('error');
+                    formHelper.classList.remove('error');
+                    formHelper.textContent = '*At least one social handle required';
+                }
+            });
+        }
     </script>
     
     <!-- Netlify form detection helper -->
     <form name="waitlist" netlify netlify-honeypot="bot-field" hidden>
         <input type="email" name="email" />
+        <input type="text" name="instagram" />
+        <input type="text" name="tiktok" />
     </form>
     
 </body>
